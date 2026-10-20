@@ -203,6 +203,3 @@ if(typeof mlcalc_no_write == "undefined"){
 	initializeMLCalcWidget();
 };
 
-
-var _mlcalc_preload_img = new Image(312,44);
-if(typeof(mlcalc_cdn_protocol) != 'undefined') _mlcalc_preload_img.src="https://www.mlcalc.com/themes/mlcalc/images/ajax-loader.gif";

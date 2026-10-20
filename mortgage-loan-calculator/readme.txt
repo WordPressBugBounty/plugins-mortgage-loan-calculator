@@ -1,9 +1,11 @@
-=== Mortgage Calculator / Loan Calculator ===
-Tags: mortgage calculator, loan calculator, calculator, mortgage, real estate, loan
+=== Mortgage Calculator ===
+Tags: mortgage calculator, loan calculator, calculator, mortgage, real estate
 Contributors: mlcalc
-Requires at least: 2.0.1
-Tested up to: 6.5.5
-Stable tag: 1.5.20
+Requires at least: 4.6
+Tested up to: 7.1
+Stable tag: 1.5.23
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Powerful mortgage and loan calculator widget with shortcode.
 
@@ -58,12 +60,25 @@ Languages included: English, German, Spanish, French, Italian, Russian, Portugue
 [mlcalc calculator="mortgage_only"]
 [mlcalc calculator="mortgage" size="narrow" price="125,000" rate="6.2" language="es" currency="eur"]`
 
+== External services ==
+
+This plugin relies on the MLCALC.com calculator service to compute and display results. When a visitor presses "Calculate", the values typed into the form (purchase price or loan amount, down payment, term, interest rate, property tax, insurance, PMI, start date, currency and language) are sent to https://www.mlcalc.com/ and the results page opens in a popup window served by mlcalc.com. Nothing is sent until the visitor submits the form, and no personal data is collected. The service is provided by ARSIDIAN LLC: [Terms of use](https://www.mlcalc.com/terms.htm), [Privacy policy](https://www.mlcalc.com/privacy.htm).
+
 == Screenshots ==
 1. The Mortgage Calculator front-end, as it appears in your WordPress Sidebar.
 2. The Mortgage Calculation Summary and Chart, as it appears when a visitor clicks the Calculate button.
 3. The Mortgage Calculator configuration dialog, as it appears within WordPress Administration Interface.
 
 == Upgrade Notice ==
+
+= 1.5.23 =
+All output escaped, fields set to "null" are hidden again, widget title no longer turned into a slug, license and external service documented.
+
+= 1.5.22 =
+Security fix: shortcode attributes are now sanitized before output (CVE-2025-0805).
+
+= 1.5.21 =
+Tested with WordPress 7.1. Calculator links now carry rel="nofollow".
 
 = 1.5.20 =
 Tested with Wordpress 6.4.0.
