@@ -1,31 +1,72 @@
 === Mortgage Calculator ===
-Tags: mortgage calculator, loan calculator, calculator, mortgage, real estate
+Tags: mortgage-calculator, loan-calculator, mortgage, calculator, real-estate
 Contributors: mlcalc
 Requires at least: 4.6
 Tested up to: 7.1
-Stable tag: 1.5.23
+Requires PHP: 7.4
+Stable tag: 1.5.24
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Powerful mortgage and loan calculator widget with shortcode.
+Mortgage and loan calculator widget with shortcode: PMI, property tax, insurance, amortization chart and schedule. 8 languages.
 
 == Description ==
 
-[Mortgage Calculator](https://www.mlcalc.com/mortgage-calculator/ "Mortgage Calculator") is a great value-add for any mortgage loan officer or real estate agent looking to provide good-looking, functional, valuable mortgage content to readers. The execution of this mortgage calculator is superb from the smooth sidebar integration, modal window results and AJAX-based graphs that are incredibly visually appealing. It's a great little loan application that delivers a lot of mortgage value in a user-friendly and well-executed way.
+This plugin adds a mortgage and loan calculator to your WordPress site, as a sidebar widget or with the `[mlcalc]` shortcode. Visitors enter the purchase price or loan amount, down payment, rate and term, then press Calculate to see a summary, a chart and an amortization schedule in a popup. It is built for mortgage loan officers, real-estate agents and finance or home-buying sites.
 
-__Shortcode__
+The calculation and the results popup are provided by the [MLCALC.com](https://www.mlcalc.com/mortgage-calculator/ "Mortgage Calculator") service, which means the calculator needs an internet connection and sends the entered values there when Calculate is pressed (see External services below).
 
-Use the mortgage/loan shortcodes on different pages:
+= Features =
+
+* Mortgage calculator with property tax, home insurance and PMI
+* Loan calculator for general loans
+* Summary, chart and amortization schedule (by month or by year) in a popup window
+* Choose which calculators to show: mortgage and loan, mortgage only or loan only
+* Narrow (150px) or wide (300px) form, suitable for sidebars and page content
+* Preset default values with shortcode attributes or in the widget settings
+* Currency: US dollar, euro, pound or a currency code of your own
+* Interface languages: English, German, Spanish, French, Italian, Russian, Portuguese and Albanian
+* CSS, JavaScript and images are bundled with the plugin and loaded from your own server
+* Free for commercial use
+
+= How to use =
+
+Add the shortcode to a page or post:
 
 `[mlcalc]`
 
-specify default mortgage values:
+Set default values:
 
-`[mlcalc calculator="mortgage" size="narrow" price="125,000" rate="6.2" language="es" currency="eur"]`
+`[mlcalc default="mortgage" size="narrow" price="125,000" rate="6.2" language="es" currency="eur"]`
 
-Languages included: English, German, Spanish, French, Italian, Russian, Portuguese, and Albanian.
+You can also add the "Mortgage Calculator" widget under Appearance > Widgets, or call `<?php display_mlcalc(); ?>` from a theme template.
 
-[WordPress Mortgage Loan Calculator Plugin](https://www.mlcalc.com/free-widgets/mortgage-loan-calculator/wordpress.htm)
+= Shortcode parameters =
+
+* default = mortgage | loan | mortgage_only | loan_only
+* size = wide | narrow
+* currency = usd | eur | gbp | any code of your own
+* rate = interest rate
+* price = purchase price
+* mterm = mortgage term in years
+* down = down payment in percent
+* tax = property tax
+* insurance = property insurance
+* pmi = PMI in percent
+* amount = loan amount
+* lterm = loan term in years
+* schedule = month | year | month_nc | year_nc | none (_nc stands for "no choice" for the visitor)
+* language = en | de | es | fr | it | pt | ru | al
+
+= Shortcode examples =
+
+`[mlcalc]`
+
+`[mlcalc default="mortgage_only"]`
+
+`[mlcalc default="loan_only" amount="20,000" lterm="5"]`
+
+`[mlcalc default="mortgage" size="narrow" price="125,000" rate="6.2" language="es" currency="eur"]`
 
 == Installation ==
 
@@ -38,38 +79,19 @@ Languages included: English, German, Spanish, French, Italian, Russian, Portugue
 * Add the following code: `<?php display_mlcalc(); ?>` to your template where you would like the mortgage loan calculator form to appear.
 * Add the shortcode `[mlcalc]` to your page or post and configure default mortgage parameters.
 
-= Shortcode mortgage and loan parameters =
-* calculator = mortgage | loan | mortgage_only | loan_only
-* size = wide | narrow
-* currency = usd | eur | gbp | CUSTOM
-* rate = '{interest rate}'
-* price = '{purchase price}'
-* mterm = '{mortgage term in years}'
-* down = '{down payment in %%}'
-* tax = '{property tax}'
-* insurance = '{property insurance}'
-* pmi = '{pmi in %%}'
-* amount = '{loan amount}'
-* lterm = '{loan term in years}'
-* schedule = month | year | month_nc | year_nc | none (_nc stands for "no choice" for visitor)
-* language = en | de | es | fr | it | pt | ru
-
-= Shortcode examples =
-`	
-[mlcalc]
-[mlcalc calculator="mortgage_only"]
-[mlcalc calculator="mortgage" size="narrow" price="125,000" rate="6.2" language="es" currency="eur"]`
-
 == External services ==
 
 This plugin relies on the MLCALC.com calculator service to compute and display results. When a visitor presses "Calculate", the values typed into the form (purchase price or loan amount, down payment, term, interest rate, property tax, insurance, PMI, start date, currency and language) are sent to https://www.mlcalc.com/ and the results page opens in a popup window served by mlcalc.com. Nothing is sent until the visitor submits the form, and no personal data is collected. The service is provided by ARSIDIAN LLC: [Terms of use](https://www.mlcalc.com/terms.htm), [Privacy policy](https://www.mlcalc.com/privacy.htm).
 
 == Screenshots ==
-1. The Mortgage Calculator front-end, as it appears in your WordPress Sidebar.
-2. The Mortgage Calculation Summary and Chart, as it appears when a visitor clicks the Calculate button.
-3. The Mortgage Calculator configuration dialog, as it appears within WordPress Administration Interface.
+
+1. The mortgage calculator form with property tax, insurance and PMI fields.
+2. The result: monthly payment breakdown, loan balance chart and payment totals.
 
 == Upgrade Notice ==
+
+= 1.5.24 =
+Fixes the loan calculator popup, which showed the plain mlcalc.com loan page instead of the results. Results now use the widget's currency.
 
 = 1.5.23 =
 All output escaped, fields set to "null" are hidden again, widget title no longer turned into a slug, license and external service documented.
@@ -145,5 +167,30 @@ Now all images, CSS and JavaScript are bundled with the plugin and loaded from y
 
 == Frequently Asked Questions ==
 
+= How do I add the mortgage calculator to a page? =
+
+Paste `[mlcalc]` into the page or post. In the block editor use a Shortcode block. To start with specific values, add attributes, for example `[mlcalc default="mortgage" price="400,000" rate="6.5" down="20"]`.
+
+= How do I show only the mortgage calculator, or only the loan calculator? =
+
+Use `default="mortgage_only"` or `default="loan_only"`. With `default="mortgage"` or `default="loan"` both calculators are available and the chosen one is shown first.
+
+= Does it calculate PMI and property tax? =
+
+Yes. The mortgage form has fields for property tax, home insurance and PMI, which you can preset with the `tax`, `insurance` and `pmi` attributes.
+
+= Which languages and currencies are supported? =
+
+English, German, Spanish, French, Italian, Russian, Portuguese and Albanian, set with the `language` attribute (or the widget settings). Currencies: `usd`, `eur`, `gbp`, or any currency code of your own.
+
+= Does it send data to an external service? =
+
+Yes. When a visitor presses Calculate, the numbers typed into the form are sent to MLCALC.com, which returns the results popup. Nothing is sent before that and no personal data is collected. See the External services section for details and links.
+
+= Does it work offline? =
+
+No. The results are produced by MLCALC.com, so the visitor needs an internet connection.
+
 = May I use your widget on my commercial website =
+
 Yes. Absolutely.
