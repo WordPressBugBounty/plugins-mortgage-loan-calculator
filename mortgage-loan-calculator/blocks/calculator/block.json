@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mortgage-loan-calculator/calculator",
+	"title": "Mortgage Calculator",
+	"category": "widgets",
+	"icon": "calculator",
+	"description": "Mortgage and loan calculator with property tax, insurance, PMI, a chart and an amortization schedule.",
+	"keywords": [ "mortgage", "loan", "calculator", "pmi", "amortization" ],
+	"textdomain": "mortgage-loan-calculator",
+	"attributes": {
+		"default": { "type": "string", "default": "mortgage_only" },
+		"size": { "type": "string", "default": "wide" },
+		"currency": { "type": "string", "default": "usd" },
+		"language": { "type": "string", "default": "" },
+		"schedule": { "type": "string", "default": "year_nc" },
+		"price": { "type": "string", "default": "" },
+		"down": { "type": "string", "default": "" },
+		"mterm": { "type": "string", "default": "" },
+		"rate": { "type": "string", "default": "" },
+		"tax": { "type": "string", "default": "" },
+		"insurance": { "type": "string", "default": "" },
+		"pmi": { "type": "string", "default": "" },
+		"amount": { "type": "string", "default": "" },
+		"lterm": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false, "align": [ "wide", "full" ] },
+	"editorScript": "file:./index.js",
+	"editorStyle": "mlcalc-form-style"
+}

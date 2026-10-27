@@ -1,10 +1,10 @@
 === Mortgage Calculator ===
 Tags: mortgage-calculator, loan-calculator, mortgage, calculator, real-estate
 Contributors: mlcalc
-Requires at least: 4.6
+Requires at least: 5.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.24
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,12 +12,13 @@ Mortgage and loan calculator widget with shortcode: PMI, property tax, insurance
 
 == Description ==
 
-This plugin adds a mortgage and loan calculator to your WordPress site, as a sidebar widget or with the `[mlcalc]` shortcode. Visitors enter the purchase price or loan amount, down payment, rate and term, then press Calculate to see a summary, a chart and an amortization schedule in a popup. It is built for mortgage loan officers, real-estate agents and finance or home-buying sites.
+This plugin adds a mortgage and loan calculator to your WordPress site, as a Gutenberg block, a sidebar widget or the `[mlcalc]` shortcode. Visitors enter the purchase price or loan amount, down payment, rate and term, then press Calculate to see a summary, a chart and an amortization schedule in a popup. It is built for mortgage loan officers, real-estate agents and finance or home-buying sites.
 
 The calculation and the results popup are provided by the [MLCALC.com](https://www.mlcalc.com/mortgage-calculator/ "Mortgage Calculator") service, which means the calculator needs an internet connection and sends the entered values there when Calculate is pressed (see External services below).
 
 = Features =
 
+* Gutenberg block with a live preview and sidebar settings
 * Mortgage calculator with property tax, home insurance and PMI
 * Loan calculator for general loans
 * Summary, chart and amortization schedule (by month or by year) in a popup window
@@ -31,7 +32,9 @@ The calculation and the results popup are provided by the [MLCALC.com](https://w
 
 = How to use =
 
-Add the shortcode to a page or post:
+In the block editor, click the "+" button, search for "Mortgage Calculator" and add the block; the sidebar lets you pick the calculators, size, currency, language and default values.
+
+Or add the shortcode to a page or post:
 
 `[mlcalc]`
 
@@ -83,12 +86,24 @@ You can also add the "Mortgage Calculator" widget under Appearance > Widgets, or
 
 This plugin relies on the MLCALC.com calculator service to compute and display results. When a visitor presses "Calculate", the values typed into the form (purchase price or loan amount, down payment, term, interest rate, property tax, insurance, PMI, start date, currency and language) are sent to https://www.mlcalc.com/ and the results page opens in a popup window served by mlcalc.com. Nothing is sent until the visitor submits the form, and no personal data is collected. The service is provided by ARSIDIAN LLC: [Terms of use](https://www.mlcalc.com/terms.htm), [Privacy policy](https://www.mlcalc.com/privacy.htm).
 
+== Changelog ==
+
+= 1.6.0 =
+* Gutenberg block: add the calculator in the block editor with a live preview and sidebar settings.
+* Translation-ready: the admin texts can be translated on translate.wordpress.org.
+* A review reminder in the admin after two weeks, dismissible.
+
+Older versions are listed under Upgrade Notice.
+
 == Screenshots ==
 
 1. The mortgage calculator form with property tax, insurance and PMI fields.
 2. The result: monthly payment breakdown, loan balance chart and payment totals.
 
 == Upgrade Notice ==
+
+= 1.6.0 =
+Adds a Mortgage Calculator block for the block editor, makes the admin texts translatable and adds a dismissible review reminder.
 
 = 1.5.24 =
 Fixes the loan calculator popup, which showed the plain mlcalc.com loan page instead of the results. Results now use the widget's currency.
@@ -169,7 +184,7 @@ Now all images, CSS and JavaScript are bundled with the plugin and loaded from y
 
 = How do I add the mortgage calculator to a page? =
 
-Paste `[mlcalc]` into the page or post. In the block editor use a Shortcode block. To start with specific values, add attributes, for example `[mlcalc default="mortgage" price="400,000" rate="6.5" down="20"]`.
+In the block editor add the "Mortgage Calculator" block and set its options in the sidebar. You can also paste `[mlcalc]` into the page or post (or into a Shortcode block). To start with specific values, add attributes, for example `[mlcalc default="mortgage" price="400,000" rate="6.5" down="20"]`.
 
 = How do I show only the mortgage calculator, or only the loan calculator? =
 

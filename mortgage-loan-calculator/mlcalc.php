@@ -24,9 +24,9 @@ Plugin Name: Mortgage Calculator
 Plugin URI: https://www.mlcalc.com/free-widgets/mortgage-loan-calculator/wordpress.htm
 Description: Powerful mortgage/loan calculator widget for your blog.
 Author: mlcalc.com
-Version: 1.5.24
+Version: 1.6.0
 Requires PHP: 7.4
-Requires at least: 4.6
+Requires at least: 5.5
 Author URI: https://www.mlcalc.com/
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -38,7 +38,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define('MLCALC_URL', plugins_url( '', __FILE__));
-define('MLCALC_VERSION', '1.5.24');
+define('MLCALC_VERSION', '1.6.0');
+
+require_once __DIR__ . '/includes/review-notice.php';
 
 
 // Numbers keep only digits and separators; the literal "null" survives because it hides the field.
@@ -46,6 +48,11 @@ function mlcalc_sanitize_number($value) {
 	$value = trim((string) $value);
 	if (strtolower($value) === 'null') return 'null';
 	return preg_replace('/[^0-9.,]/', '', $value);
+}
+
+function mlcalc_register_styles() {
+	wp_register_style( 'mlcalc-form-small-style', plugins_url('widget-form-small.css', __FILE__), array(), MLCALC_VERSION );
+	wp_register_style( 'mlcalc-form-style', plugins_url('widget-form.css', __FILE__), array(), MLCALC_VERSION );
 }
 
 /* Function: display_mlcalc_widget
@@ -203,8 +210,7 @@ function display_mlcalc($options = array(), $content = null, $code = "") {
 		'before' );
 
 	// LOAD STYLES
-	wp_register_style( 'mlcalc-form-small-style', plugins_url('widget-form-small.css', __FILE__), array(), MLCALC_VERSION );
-	wp_register_style( 'mlcalc-form-style', plugins_url('widget-form.css', __FILE__), array(), MLCALC_VERSION );
+	mlcalc_register_styles();
 	if($form_size == 'small'){
 		wp_enqueue_style( 'mlcalc-form-small-style' );
 	} else {
@@ -313,17 +319,17 @@ function mlcalc_control() {
 				</select>
 			</label>
 		</p>
-		<p><a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc_default_values').show() : document.getElementById('mlcalc_default_values').style.display = 'inline'; this.style.display = 'none'; return false;">Change default values...</a></p>
+		<p><a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc_default_values').show() : document.getElementById('mlcalc_default_values').style.display = 'inline'; this.style.display = 'none'; return false;"><?php esc_html_e( 'Change default values...', 'mortgage-loan-calculator' ); ?></a></p>
 		<span style="display:none" id="mlcalc_default_values" class="mlcalc_default_values">
 		<p><label for="mlcalc-purchase_price"><?php esc_html_e( 'Purchase price', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 65px; text-align: center;" type="text" value="<?php echo esc_attr($options['purchase_price']); ?>" name="mlcalc-purchase_price" id="mlcalc-purchase_price" /> $</label></p>
-		<p><label for="mlcalc-down_payment"><?php esc_html_e( 'Down payment', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-down_payment').val('null') : document.getElementById('mlcalc-down_payment').value='null'; return false;">hide this field</a>)</small>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['down_payment']); ?>" name="mlcalc-down_payment" id="mlcalc-down_payment" class="mlcalc-down_payment" /> %</label></p>
-		<p><label for="mlcalc-mortgage_term"><?php esc_html_e( 'Mortgage term', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['mortgage_term']); ?>" name="mlcalc-mortgage_term" id="mlcalc-mortgage_term" /> years</label></p>
+		<p><label for="mlcalc-down_payment"><?php esc_html_e( 'Down payment', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-down_payment').val('null') : document.getElementById('mlcalc-down_payment').value='null'; return false;"><?php esc_html_e( 'hide this field', 'mortgage-loan-calculator' ); ?></a>)</small>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['down_payment']); ?>" name="mlcalc-down_payment" id="mlcalc-down_payment" class="mlcalc-down_payment" /> %</label></p>
+		<p><label for="mlcalc-mortgage_term"><?php esc_html_e( 'Mortgage term', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['mortgage_term']); ?>" name="mlcalc-mortgage_term" id="mlcalc-mortgage_term" /> <?php esc_html_e( 'years', 'mortgage-loan-calculator' ); ?></label></p>
 		<p><label for="mlcalc-interest_rate"><?php esc_html_e( 'Interest rate', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['interest_rate']); ?>" name="mlcalc-interest_rate" id="mlcalc-interest_rate" /> %</label></p>
-		<p><label for="mlcalc-property_tax"><?php esc_html_e( 'Property tax', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-property_tax').val('null') : document.getElementById('mlcalc-property_tax').value='null'; return false;">hide this field</a>)</small>: <br /> <input style="width: 65px; text-align: center;" type="text" value="<?php echo esc_attr($options['property_tax']); ?>" name="mlcalc-property_tax" id="mlcalc-property_tax" class="mlcalc-property_tax" /> $ per year</label></p>
-		<p><label for="mlcalc-property_insurance"><?php esc_html_e( 'Property insurance', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-property_insurance').val('null') : document.getElementById('mlcalc-property_insurance').value='null'; return false;">hide this field</a>)</small>: <br /> <input style="width: 65px; text-align: center;" type="text" value="<?php echo esc_attr($options['property_insurance']); ?>" name="mlcalc-property_insurance" id="mlcalc-property_insurance" class="mlcalc-property_insurance" /> $ per year</label></p>
-		<p><label for="mlcalc-pmi"><?php esc_html_e( 'PMI', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-pmi').val('null') : document.getElementById('mlcalc-pmi').value='null'; return false;">hide this field</a>)</small>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['pmi']); ?>" name="mlcalc-pmi" id="mlcalc-pmi" class="mlcalc-pmi" /> %</label></p>
+		<p><label for="mlcalc-property_tax"><?php esc_html_e( 'Property tax', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-property_tax').val('null') : document.getElementById('mlcalc-property_tax').value='null'; return false;"><?php esc_html_e( 'hide this field', 'mortgage-loan-calculator' ); ?></a>)</small>: <br /> <input style="width: 65px; text-align: center;" type="text" value="<?php echo esc_attr($options['property_tax']); ?>" name="mlcalc-property_tax" id="mlcalc-property_tax" class="mlcalc-property_tax" /> <?php esc_html_e( '$ per year', 'mortgage-loan-calculator' ); ?></label></p>
+		<p><label for="mlcalc-property_insurance"><?php esc_html_e( 'Property insurance', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-property_insurance').val('null') : document.getElementById('mlcalc-property_insurance').value='null'; return false;"><?php esc_html_e( 'hide this field', 'mortgage-loan-calculator' ); ?></a>)</small>: <br /> <input style="width: 65px; text-align: center;" type="text" value="<?php echo esc_attr($options['property_insurance']); ?>" name="mlcalc-property_insurance" id="mlcalc-property_insurance" class="mlcalc-property_insurance" /> <?php esc_html_e( '$ per year', 'mortgage-loan-calculator' ); ?></label></p>
+		<p><label for="mlcalc-pmi"><?php esc_html_e( 'PMI', 'mortgage-loan-calculator' ); ?> <small>(<a href="https://www.mlcalc.com/mortgage-calculator/" onclick="(typeof jQuery != 'undefined') ? jQuery('.mlcalc-pmi').val('null') : document.getElementById('mlcalc-pmi').value='null'; return false;"><?php esc_html_e( 'hide this field', 'mortgage-loan-calculator' ); ?></a>)</small>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['pmi']); ?>" name="mlcalc-pmi" id="mlcalc-pmi" class="mlcalc-pmi" /> %</label></p>
 		<p><label for="mlcalc-loan_amount"><?php esc_html_e( 'Loan amount', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 65px; text-align: center;" type="text" value="<?php echo esc_attr($options['loan_amount']); ?>" name="mlcalc-loan_amount" id="mlcalc-loan_amount" /> $</label></p>
-		<p><label for="mlcalc-loan_term"><?php esc_html_e( 'Loan term', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['loan_term']); ?>" name="mlcalc-loan_term" id="mlcalc-loan_term" /> years</label></p>
+		<p><label for="mlcalc-loan_term"><?php esc_html_e( 'Loan term', 'mortgage-loan-calculator' ); ?>: <br /> <input style="width: 35px; text-align: center;" type="text" value="<?php echo esc_attr($options['loan_term']); ?>" name="mlcalc-loan_term" id="mlcalc-loan_term" /> <?php esc_html_e( 'years', 'mortgage-loan-calculator' ); ?></label></p>
 		</span>
 
 		<input type="hidden" id="mlcalc-submit" name="mlcalc-submit" value="1" />
@@ -349,3 +355,24 @@ function mlcalc_register() {
 // This is important
 add_action( 'widgets_init', 'mlcalc_register' );
 add_shortcode( 'mlcalc', 'display_mlcalc' );
+
+// Gutenberg block: dynamic, rendered by the same callback as the [mlcalc] shortcode.
+function mlcalc_register_block() {
+	if ( ! function_exists( 'register_block_type' ) ) {
+		return; // WordPress < 5.0: the shortcode and the widget still work.
+	}
+	mlcalc_register_styles();
+	register_block_type(
+		__DIR__ . '/blocks/calculator',
+		array(
+			'render_callback' => function ( $attributes ) {
+				// Block attributes map 1:1 to shortcode attributes; empty ones are dropped so the defaults apply.
+				return display_mlcalc( array_filter( (array) $attributes, 'strlen' ), null, 'mlcalc' );
+			},
+		)
+	);
+	if ( function_exists( 'wp_set_script_translations' ) ) {
+		wp_set_script_translations( 'mortgage-loan-calculator-calculator-editor-script', 'mortgage-loan-calculator' );
+	}
+}
+add_action( 'init', 'mlcalc_register_block' );
