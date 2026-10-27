@@ -24,7 +24,7 @@ Plugin Name: Mortgage Calculator
 Plugin URI: https://www.mlcalc.com/free-widgets/mortgage-loan-calculator/wordpress.htm
 Description: Powerful mortgage/loan calculator widget for your blog.
 Author: mlcalc.com
-Version: 1.6.0
+Version: 1.6.1
 Requires PHP: 7.4
 Requires at least: 5.5
 Author URI: https://www.mlcalc.com/
@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define('MLCALC_URL', plugins_url( '', __FILE__));
-define('MLCALC_VERSION', '1.6.0');
+define('MLCALC_VERSION', '1.6.1');
 
 require_once __DIR__ . '/includes/review-notice.php';
 

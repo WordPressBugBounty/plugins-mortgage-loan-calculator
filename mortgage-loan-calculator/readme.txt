@@ -4,7 +4,7 @@ Contributors: mlcalc
 Requires at least: 5.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,9 @@ This plugin relies on the MLCALC.com calculator service to compute and display r
 
 == Changelog ==
 
+= 1.6.1 =
+* Fixed: the results popup cut off the bottom of the results; it now fits the window and scrolls when needed.
+
 = 1.6.0 =
 * Gutenberg block: add the calculator in the block editor with a live preview and sidebar settings.
 * Translation-ready: the admin texts can be translated on translate.wordpress.org.
@@ -99,8 +102,12 @@ Older versions are listed under Upgrade Notice.
 
 1. The mortgage calculator form with property tax, insurance and PMI fields.
 2. The result: monthly payment breakdown, loan balance chart and payment totals.
+3. The Mortgage Calculator block in the block editor, with its settings in the sidebar.
 
 == Upgrade Notice ==
+
+= 1.6.1 =
+Fixes the results popup, which cut off the bottom of the results. It now fits the window and scrolls when needed.
 
 = 1.6.0 =
 Adds a Mortgage Calculator block for the block editor, makes the admin texts translatable and adds a dismissible review reminder.

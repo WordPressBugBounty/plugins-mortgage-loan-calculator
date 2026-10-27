@@ -19,14 +19,14 @@ function initializeMLCalcWidget(){
 	jQuery('#MLCalcFormLoanForm').bind('submit', function(){
 		if(typeof(mlcalc_amortization) == 'undefined') mlcalc_amortization = 'none';
 		if(validateForm(jQuery(this)) == false) return false;
-		iframeHeight = (mlcalc_amortization == 'none') ? 310 : 570;
+		iframeHeight = (mlcalc_amortization == 'none') ? 340 : 1100;
 		initFloatLayer(iframeHeight);
 		jQuery(this).attr('target', 'MLCalcFrame');
 	});
 	jQuery('#MLCalcFormMortgageForm').bind('submit', function(){
 		if(typeof(mlcalc_amortization) == 'undefined') mlcalc_amortization = 'none';
 		if(validateForm(jQuery(this)) == false) return false;
-		iframeHeight = (mlcalc_amortization == 'none') ? 327 : 578;
+		iframeHeight = (mlcalc_amortization == 'none') ? 820 : 1400;
 		initFloatLayer(iframeHeight);
 		jQuery(this).attr('target', 'MLCalcFrame');
 	});
@@ -38,6 +38,7 @@ function initializeMLCalcWidget(){
 function initFloatLayer(iframeHeight){
 	var viewportWidth  = jQuery(window).width();
 	var viewportHeight = jQuery(window).height();
+	iframeHeight = Math.min(iframeHeight, Math.max(viewportHeight - 40, 200));
 
 	var documentWidth  = 0;
 	var documentHeight = 0;
@@ -90,7 +91,7 @@ function initFloatLayer(iframeHeight){
 		.show();
 
 	if(jQuery('#MLCalcHolder #MLCalcFrame').length < 1){
-		jQuery('#MLCalcHolder').html('<iframe src="#" scrolling="no" id="MLCalcFrame" name="MLCalcFrame" width="0" height="0" frameborder="0" allowtransparency="true" style="background-color: transparent; display: none"></iframe><iframe id="garbageFrame" style="display:none"></iframe>')
+		jQuery('#MLCalcHolder').html('<iframe src="#" scrolling="auto" id="MLCalcFrame" name="MLCalcFrame" width="0" height="0" frameborder="0" allowtransparency="true" style="background-color: transparent; display: none"></iframe><iframe id="garbageFrame" style="display:none"></iframe>')
 	};
 	jQuery(document).keyup(function(e) {
 		if (e.keyCode == 27) mlcalcHideAll();
